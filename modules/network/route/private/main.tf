@@ -1,7 +1,7 @@
 ################
 # Publiс routes
 ################
-resource "aws_route_table" "main" {
+resource "aws_route_table" "private" {
   #count = var.create_vpc && length(var.subnet_cidr) > 0 ? 1 : 0
 
   vpc_id             = var.vpc_id
@@ -13,9 +13,4 @@ resource "aws_route_table" "main" {
     var.tags,
     var.private_route_table_tags,
   )
-}
-
-resource "aws_route_table_association" "a" {
-  subnet_id         = var.subnet_id
-  route_table_id    = var.route_id
 }

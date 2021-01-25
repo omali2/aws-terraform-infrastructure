@@ -27,6 +27,7 @@ module "vpc_public_subnets" {
   source  = "../modules/network/subnet/public"
 
     vpc_id            = module.vpc.vpc_id
+    route_id          = module.aws_public_route_table.public_route_table_id
     subnet_cidr       = var.public_subnet_cidr
     vpc_region        = var.vpc_region
     tags              = var.tags
@@ -37,6 +38,7 @@ module "vpc_private_subnets" {
   source  = "../modules/network/subnet/private"
 
     vpc_id            = module.vpc.vpc_id
+    route_id          = module.aws_private_route_table.private_route_table_id
     subnet_cidr       = var.private_subnet_cidr
     vpc_region        = var.vpc_region
     tags              = var.tags
@@ -47,6 +49,7 @@ module "vpc_database_subnets" {
   source  = "../modules/network/subnet/database"
 
     vpc_id            = module.vpc.vpc_id
+    route_id          = module.aws_database_route_table.database_route_table_id
     subnet_cidr       = var.database_subnet_cidr
     vpc_region        = var.vpc_region
     tags              = var.tags
@@ -94,8 +97,6 @@ module "aws_public_route_table" {
   source  = "../modules/network/route/public"
 
   vpc_id                            = module.vpc.vpc_id
-  subnet_id                         = module.vpc_public_subnets.public_subnet_id
-  route_id                          = module.aws_public_route_table.public_route_table_id
   name                              = "${var.name}_${var.vpc_environment}_${var.public_subnet_suffix}"
   tags                              = var.tags
   public_route_table_tags           = var.public_route_table_tags
@@ -109,8 +110,6 @@ module "aws_private_route_table" {
   source  = "../modules/network/route/private"
 
   vpc_id                            = module.vpc.vpc_id
-  subnet_id                         = module.vpc_public_subnets.public_subnet_id
-  route_id                          = module.aws_private_route_table.private_route_table_id
   name                              = "${var.name}_${var.vpc_environment}_${var.private_subnet_suffix}"
   tags                              = var.tags
   private_route_table_tags          = var.private_route_table_tags
@@ -125,8 +124,6 @@ module "aws_database_route_table" {
   source  = "../modules/network/route/database"
 
   vpc_id                            = module.vpc.vpc_id
-  subnet_id                         = module.vpc_database_subnets.database_subnet_id
-  route_id                          = module.aws_database_route_table.database_route_table_id
   name                              = "${var.name}_${var.vpc_environment}_${var.database_subnet_suffix}"
   tags                              = var.tags
   database_route_table_tags          = var.database_route_table_tags

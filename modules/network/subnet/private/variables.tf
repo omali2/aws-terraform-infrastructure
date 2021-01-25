@@ -26,3 +26,8 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "route_id" {
+  description = "route id"
+  type        = string
+}

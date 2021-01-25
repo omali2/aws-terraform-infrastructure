@@ -31,13 +31,3 @@ variable "subnet_associated_cidr" {
   type        = list(string)
   default     = []
 }
-
-variable "route_id" {
-  description = "route id"
-  type        = string
-}
-
-variable "subnet_id" {
-  description = "subnet_id"
-  type        = string
-}

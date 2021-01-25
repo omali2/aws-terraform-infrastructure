@@ -25,13 +25,3 @@ variable "enable_ipv6" {
   type        = bool
   default     = false
 }
-
-variable "route_id" {
-  description = "route id"
-  type        = string
-}
-
-variable "subnet_id" {
-  description = "subnet_id"
-  type        = string
-}
