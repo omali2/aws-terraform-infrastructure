@@ -143,4 +143,41 @@ module "route_internet_gateway" {
 
 }
 
+#######
 # Security group
+#######
+module "aws_default_security_group" {
+  source  = "../modules/network/sg/default"
+
+  vpc_id       = module.vpc.vpc_id
+  subnet_cidr  = var.default_subnet_cidr
+  name         = "${var.name}_${var.vpc_environment}_default_sq"
+
+}
+
+module "aws_public_security_group" {
+  source  = "../modules/network/sg/public"
+
+  vpc_id       = module.vpc.vpc_id
+  subnet_cidr  = var.public_subnet_cidr
+  name         = "${var.name}_${var.vpc_environment}_public_sq"
+
+}
+
+module "aws_private_security_group" {
+  source  = "../modules/network/sg/private"
+
+  vpc_id       = module.vpc.vpc_id
+  subnet_cidr  = var.private_subnet_cidr
+  name         = "${var.name}_${var.vpc_environment}_private_sq"
+
+}
+
+module "aws_database_security_group" {
+  source  = "../modules/network/sg/database"
+
+  vpc_id       = module.vpc.vpc_id
+  subnet_cidr  = var.database_subnet_cidr
+  name         = "${var.name}_${var.vpc_environment}_database_sq"
+
+}

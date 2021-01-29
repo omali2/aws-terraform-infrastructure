@@ -89,6 +89,12 @@ variable "vpc_tags" {
   default     = {}
 }
 
+variable "default_subnet_cidr" {
+  description = "Public subnets for VPC"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
 variable "public_subnet_cidr" {
   description = "Public subnets for VPC"
   type        = list(string)
@@ -105,6 +111,12 @@ variable "database_subnet_cidr" {
   description = "Database subnets for VPC"
   type        = list(string)
   default     = ["10.0.100.0/24", "10.0.200.0/24"]
+}
+
+variable "private_sq_cidr" {
+  description = "Database subnets for VPC"
+  type        = list(string)
+  default     = ["4.5.6.0/24", "1.2.3.0/24"]
 }
 
 variable "igw_tags" {
