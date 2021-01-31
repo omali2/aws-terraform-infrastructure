@@ -1,6 +1,13 @@
 /*
   Database Servers
 */
+    vpc_id = var.vpc_id
+
+    tags {
+        Name = "DBServerSG"
+    }
+}
+
 resource "aws_instance" "db-1" {
     ami = "${lookup(var.amis, var.aws_region)}"
     availability_zone = "eu-central-1a"

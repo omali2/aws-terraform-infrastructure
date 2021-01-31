@@ -4,12 +4,33 @@ resource "aws_security_group" "database" {
   description = "Allow TLS inbound traffic"
   vpc_id      = var.vpc_id
 
+  ingress { # SQL Server
+      from_port = 1433
+      to_port = 1433
+      protocol = "tcp"
+      cidr_blocks = var.subnet_cidr
+      #security_groups = ["${aws_security_group.web.id}"]
+  }
+  ingress { # MySQL
+      from_port = 3306
+      to_port = 3306
+      protocol = "tcp"
+      cidr_blocks = var.subnet_cidr
+      #security_groups = ["${aws_security_group.web.id}"]
+  }
+
   ingress {
-    description = "mysql port from VPC"
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = var.subnet_cidr
+      from_port = 22
+      to_port = 22
+      protocol = "tcp"
+      cidr_blocks = var.subnet_cidr
+  }
+  
+  ingress {
+      from_port = -1
+      to_port = -1
+      protocol = "icmp"
+      cidr_blocks = var.subnet_cidr
   }
 
   egress {

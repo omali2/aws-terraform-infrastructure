@@ -104,7 +104,7 @@ module "aws_public_route_table" {
 }
 
 ###############
-# Publiс routes
+# Private routes
 ################
 module "aws_private_route_table" {
   source  = "../modules/network/route/private"
